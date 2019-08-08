@@ -3,6 +3,7 @@ package com.softwarehut.jpa.entityGraph.service;
 import com.softwarehut.jpa.entityGraph.model.Company;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 
 @Service
+@Primary
 public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
