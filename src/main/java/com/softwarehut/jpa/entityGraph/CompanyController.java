@@ -22,6 +22,12 @@ public class CompanyController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, path = "/withDepartments/{companyId}")
     @ResponseStatus(value = HttpStatus.OK)
     public Company getCompanyWithDepartments(@PathVariable("companyId") Long companyId) {
+    	
+    	System.out.println("aca");
+    	Company company = companyService.getCompanyWithDepartments(companyId);
+    	System.out.println(company.getName());
+    	System.out.println(company.getDepartments().size());
+    	
         return companyService.getCompanyWithDepartments(companyId);
     }
 
