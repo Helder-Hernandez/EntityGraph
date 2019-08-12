@@ -1,9 +1,5 @@
 package com.softwarehut.jpa.entityGraph.service;
 
-import com.softwarehut.jpa.entityGraph.model.Company;
-
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +7,12 @@ import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Service;
+
+import com.softwarehut.jpa.entityGraph.model.Company;
+
 @Service(value = "companyServiceEntityGraph")
 public class CompanyServiceEntityGraphImpl implements CompanyService {
-
     @PersistenceContext
     private EntityManager entityManager;
 

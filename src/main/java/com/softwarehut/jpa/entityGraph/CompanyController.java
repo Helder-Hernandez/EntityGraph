@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,11 +21,28 @@ public class CompanyController {
     @Autowired
     @Qualifier(value = "companyServiceEntityGraph")
     private CompanyService companyService;
+    
+    @Autowired
+    @Qualifier("implCrudRespository")
+    private CompanyService companyServiceCR;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, path = "/withDepartments/{companyId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Company getCompanyWithDepartments(@PathVariable("companyId") Long companyId) {
-        return companyService.getCompanyWithDepartments(companyId);
+    public Company getCompanyWithDepartments(@PathVariable("companyId") Long companyId, @RequestParam(value = "cr", required = false) String cr) {
+    	
+    	
+    	if (cr != null) {
+    		System.out.println(cr);
+    		
+    		return companyServiceCR.getCompanyWithDepartments(companyId);
+		} else {
+			System.out.println("aca");
+	    	Company company = companyService.getCompanyWithDepartments(companyId);
+	    	System.out.println(company.getName());
+	    	System.out.println(company.getDepartments().size());
+	    	
+	        return companyService.getCompanyWithDepartments(companyId);
+		}    	
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, path = "/withDepartmentsAndEmployees/{companyId}")
